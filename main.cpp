@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
+#include <conio.h>
 #include "BunnyColony.h"
-#include "BunnyGenerator.h"
 
 int main() {
 
@@ -14,13 +14,12 @@ int main() {
     int itr = 0;
     colony.printStatus(itr);
 
-    while (true)
-    {
+    while (colony.getMaleCount() > 0 && colony.getFemaleCount() > 0) {
         colony.nextTurn();
         ++itr;
         colony.printStatus(itr);
-        if (itr > 100) break;
+        if (itr % 10 == 0) getch(); // stop every 10 turns
     }
 
-    std::cout<< "End...";
+    std::cout << "End...";
 }

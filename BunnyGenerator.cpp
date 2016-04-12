@@ -4,6 +4,11 @@
 
 #include "BunnyGenerator.h"
 
+BunnyGenerator::BunnyGenerator() {
+    std::cout << "BunnyGenerator Constructor called...";
+    this->nameGenerator = new NameGenerator();
+}
+
 Bunny *BunnyGenerator::makeRandomBunny() {
     Bunny *b = new Bunny();
     Bunny::Sex s = Bunny::MALE;
@@ -20,10 +25,7 @@ Bunny *BunnyGenerator::makeRandomBunny() {
     return b;
 }
 
-BunnyGenerator::BunnyGenerator() {
-    std::cout << "BunnyGenerator Constructor called...";
-    this->nameGenerator = new NameGenerator();
-}
+
 
 Bunny *BunnyGenerator::makeBunnyFromParent(const Bunny *b) {
     Bunny *child = new Bunny();

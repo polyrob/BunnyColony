@@ -12,13 +12,14 @@
 
 class BunnyColony {
 
-    vector<Bunny*> bunnies;
+    vector<Bunny *> bunnies;
 
     BunnyGenerator bunnyGenerator;
 
     void ageBunnies();
 //    int getFemaleCount();
 
+    // although calling size on a vector is O(1), we still need to know the mix
     int maleCount = 0;
     int femaleCount = 0;
 
@@ -27,16 +28,24 @@ class BunnyColony {
 public:
     void nextTurn();
 
-
     void addBunny(Bunny *pBunny);
 
-    void printStatus(const int& iteration);
+    void printStatus(const int &iteration);
 
     void killOldBunnies();
 
     void procreate();
 
     void seed();
+
+
+    int getMaleCount() const {
+        return maleCount;
+    }
+
+    int getFemaleCount() const {
+        return femaleCount;
+    }
 };
 
 

@@ -40,7 +40,7 @@ void BunnyColony::killOldBunnies() {
     for (vector<Bunny *>::iterator itr = bunnies.begin(); itr != bunnies.end();) {
         Bunny *b = *itr;
         if (b->getAge() > 10) {
-            bunnies.erase(itr);
+            bunnies.erase(itr); // O(n) for vector
             if (b->getSex() == Bunny::MALE) {
                 --maleCount;
             } else {
@@ -80,7 +80,7 @@ void BunnyColony::foodShortage() {
     for (vector<Bunny *>::iterator itr = bunnies.begin(); itr != bunnies.end();) {
         if (rand() % 2) {
             Bunny *b = *itr;
-            bunnies.erase(itr);
+            bunnies.erase(itr); // O(n) for vector
             if (b->getSex() == Bunny::MALE) {
                 --maleCount;
             } else {
