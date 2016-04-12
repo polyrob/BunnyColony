@@ -6,6 +6,7 @@
 #define BUNNY_BUNNY_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 

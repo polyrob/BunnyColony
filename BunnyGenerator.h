@@ -15,11 +15,11 @@ class BunnyGenerator {
 public:
 
     BunnyGenerator();
-    virtual ~BunnyGenerator() { std::cout << "NameGenerator Destructor called..."; }
+    virtual ~BunnyGenerator() { std::cout << "NameGenerator Destructor called..." << std::endl; }
 
     Bunny *makeRandomBunny();
 
-    Bunny *makeBunnyFromParents(const Bunny &b1, const Bunny &b2);
+    Bunny *makeBunnyFromParent(const Bunny *b);
 
 };
 

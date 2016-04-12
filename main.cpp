@@ -8,16 +8,19 @@ int main() {
     srand(time(NULL));
 
     BunnyColony colony;
-    BunnyGenerator bunnyGenerator;
+    colony.seed();
 
-    // init with 5 bunnies
-    for (int i = 0; i < 5; ++i) {
-        Bunny* b = bunnyGenerator.makeRandomBunny();
-        colony.addBunny(b);
-        b->printInfo();
+
+    int itr = 0;
+    colony.printStatus(itr);
+
+    while (true)
+    {
+        colony.nextTurn();
+        ++itr;
+        colony.printStatus(itr);
+        if (itr > 100) break;
     }
 
-    colony.printStatus();
-
-
+    std::cout<< "End...";
 }

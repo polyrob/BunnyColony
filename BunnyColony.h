@@ -8,12 +8,19 @@
 
 #include <vector>
 #include "Bunny.h"
+#include "BunnyGenerator.h"
 
 class BunnyColony {
 
     vector<Bunny*> bunnies;
 
-    int getFemaleCount();
+    BunnyGenerator bunnyGenerator;
+
+    void ageBunnies();
+//    int getFemaleCount();
+
+    int maleCount = 0;
+    int femaleCount = 0;
 
     void foodShortage();
 
@@ -23,7 +30,13 @@ public:
 
     void addBunny(Bunny *pBunny);
 
-    void printStatus();
+    void printStatus(const int& iteration);
+
+    void killOldBunnies();
+
+    void procreate();
+
+    void seed();
 };
 
 

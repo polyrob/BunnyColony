@@ -25,6 +25,24 @@ BunnyGenerator::BunnyGenerator() {
     this->nameGenerator = new NameGenerator();
 }
 
+Bunny *BunnyGenerator::makeBunnyFromParent(const Bunny *b) {
+    Bunny *child = new Bunny();
+    Bunny::Sex s = Bunny::MALE;
+    if (rand() % 2) {
+        s = Bunny::FEMALE;
+    }
+
+    child->setSex(s);
+    child->setName(nameGenerator->getRandomName(s));
+    child->setAge(0);
+
+    child->setColor(b->getColor());
+
+    return child;
+}
+
+
+
 
 
 
