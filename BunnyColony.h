@@ -16,8 +16,8 @@ struct Node {
 
 class BunnyColony {
 
-//    vector<Bunny *> bunnies;
-    Node* bunnies = nullptr;
+//    vector<Bunny *> root;
+    Node*root = nullptr;
 
     BunnyGenerator bunnyGenerator;
 

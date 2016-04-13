@@ -7,14 +7,14 @@
 
 
 void BunnyColony::addBunny(Bunny *pBunny) {
-    Node *newNode;
+    Node *newNode = new Node();
     newNode->b = pBunny;
     newNode->next = nullptr;
 
-    if (bunnies == nullptr) {
-        bunnies = newNode;
+    if (root == nullptr) {
+        root = newNode;
     } else {
-        Node *temp = bunnies->next;
+        Node *temp = root;
 
         while (temp->next != nullptr) {
             temp = temp->next;
@@ -47,68 +47,52 @@ void BunnyColony::nextTurn() {
 
 
 void BunnyColony::ageBunnies() {
-    if (bunnies == nullptr) return;
+    if (root == nullptr) return;
 
 
     // if first node is old, need to shift head right
-    while (bunnies->b->getAge() > 9) {
-        Node *tmp = bunnies;
-        delete(tmp->b);
+    while (root->b->getAge() > 9) {
+        Node *tmp = root;
+        root = root->next;
+        delete (tmp->b);
         delete (tmp);
-        bunnies = bunnies->next;
     }
 
-    if (bunnies == nullptr) return; // might be empty, now
+    if (root == nullptr) return; // might be empty, now
+    root->b->setAge(root->b->getAge() + 1); //age the first bunny
 
-    Node *current = bunnies;
-    Node *next = bunnies->next;
+
+    Node *current = root;
+    Node *nextNode = root->next;
 
     // go through the rest
-    while (next != nullptr) {
-        Bunny *b = next->b;
+    while (nextNode != nullptr) {
+        Bunny *b = nextNode->b;
         if (b->getAge() > 9) {
-            Node* tmp = next;
-            delete(b);
-            delete(next);
+            current->next = nextNode->next;
+            delete (nextNode);
 
         } else {
             // age
             b->setAge(b->getAge() + 1);
         }
-        current->next = next->next;
+        current = current->next;
+        nextNode = current->next;
 
     }
 }
 
-//void BunnyColony::killOldBunnies() {
-//    Node *temp = bunnies;
-//    while (temp != nullptr) {
-//        temp->b->setAge(temp->b->getAge() + 1);
-//        temp = temp->next;
-//    }
-//
-//    for (vector<Bunny *>::iterator itr = bunnies.begin(); itr != bunnies.end();) {
-//        Bunny *b = *itr;
-//        if (b->getAge() > 10) {
-//            bunnies.erase(itr); // O(n) for vector
-//            if (b->getSex() == Bunny::MALE) {
-//                --maleCount;
-//            } else {
-//                --femaleCount;
-//            }
-//            delete (b);
-//        } else {
-//            ++itr;
-//        }
-//    }
-//}
 
 void BunnyColony::procreate() {
+    if (root == nullptr) return;
+
     // get males and females over age 2
     vector<Bunny *> adultMales;
     vector<Bunny *> adultFemales;
 
-    for (Bunny *b : bunnies) {
+    Node *temp = root;
+    while (temp != nullptr) {
+        Bunny *b = temp->b;
         if (b->getAge() > 1) {
             if (b->getSex() == Bunny::MALE) {
                 adultMales.push_back(b);
@@ -116,7 +100,10 @@ void BunnyColony::procreate() {
                 adultFemales.push_back(b);
             }
         }
+        temp = temp->next;
     }
+    // done going through
+
 
     // check at least one adult male
     if (adultMales.size() > 0) {
@@ -127,24 +114,52 @@ void BunnyColony::procreate() {
 }
 
 void BunnyColony::foodShortage() {
-    for (vector<Bunny *>::iterator itr = bunnies.begin(); itr != bunnies.end();) {
+    Node *temp = root;
+    while (temp != nullptr) {
         if (rand() % 2) {
-            Bunny *b = *itr;
-            bunnies.erase(itr); // O(n) for vector
+            // kill it
+            Bunny *b = temp->b;
+
+            if (b->getAge() > 1) {
+                if (b->getSex() == Bunny::MALE) {
+                    --maleCount;
+                } else {
+                    --femaleCount;
+                }
+            }
+
+        }
+        temp = temp->next;
+    }
+
+
+    Node *current = root;
+    Node *nextNode = root->next;
+
+    // go through the rest
+    while (nextNode != nullptr) {
+        Bunny *b = nextNode->b;
+        if (rand() % 2) {
+
             if (b->getSex() == Bunny::MALE) {
                 --maleCount;
             } else {
                 --femaleCount;
             }
-            delete (b);
-        } else {
-            ++itr;
+
+            current->next = nextNode->next;
+            delete (nextNode);
+
         }
+        current = current->next;
+        nextNode = current->next;
+
     }
+
 }
 
 void BunnyColony::seed() {
-    // init with 5 bunnies
+    // init with 5 root
     for (int i = 0; i < 5; ++i) {
         Bunny *b = bunnyGenerator.makeRandomBunny();
         this->addBunny(b);

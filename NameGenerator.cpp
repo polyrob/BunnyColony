@@ -6,7 +6,7 @@
 #include "NameGenerator.h"
 
 NameGenerator::NameGenerator() {
-    std::cout << "NameGenerator Constructor called...";
+    std::cout << "NameGenerator Constructor called..." << std::endl;
 
     try {
         loadFromFile(NAMES_FIRST_MALE, vFirstNamesMale);

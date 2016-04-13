@@ -1,6 +1,5 @@
 #include <iostream>
 #include <time.h>
-#include <conio.h>
 #include "BunnyColony.h"
 
 int main() {
@@ -18,7 +17,7 @@ int main() {
         colony.nextTurn();
         ++itr;
         colony.printStatus(itr);
-        if (itr % 10 == 0) getch(); // stop every 10 turns
+        if (itr % 10 == 0) system("pause"); // stop every 10 turns
     }
 
     std::cout << "End...";
