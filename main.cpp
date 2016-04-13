@@ -14,7 +14,7 @@ int main() {
 
 	while (colony.getMaleCount() > 0 && colony.getFemaleCount() > 0) {
 		colony.nextTurn(++turn);
-		if (turn >= 14)
+		if (turn >= 100)
 			break;
 	}
 

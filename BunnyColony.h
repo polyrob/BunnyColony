@@ -25,8 +25,9 @@ class BunnyColony {
 	void ageBunnies();
 
 	// although calling size on a vector is O(1), we still need to know the mix
-	int maleCount = 0;
-	int femaleCount = 0;
+	unsigned int maleCount = 0;
+	unsigned int femaleCount = 0;
+	unsigned int mutantCount = 0;
 
 	void foodShortage();
 	void removeBunnyFromCount(Bunny* b);

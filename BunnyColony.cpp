@@ -3,8 +3,9 @@
 //
 
 #include <iostream>
-#include "BunnyColony.h"
+#include <algorithm>
 #include <stdlib.h>
+#include "BunnyColony.h"
 #include "Enum.h"
 
 void BunnyColony::addBunny(Bunny *pBunny) {
@@ -40,8 +41,9 @@ void BunnyColony::nextTurn(const int &iteration) {
 		foodShortage();
 	}
 
-	std::cout << " Colony Size: " << maleCount + femaleCount << ", M/F: "
-			<< maleCount << "/" << femaleCount << std::endl;
+	std::cout << " Colony Size: " << maleCount + femaleCount;
+	std::cout << ", M/F: " << maleCount << "/" << femaleCount;
+	std::cout << ", Mutants: " << mutantCount << std::endl;
 }
 
 void BunnyColony::ageBunnies() {
@@ -98,7 +100,7 @@ void BunnyColony::procreate() {
 	Node *temp = root;
 	while (temp != nullptr) {
 		Bunny *b = temp->b;
-		if (b->getAge() > 1) {
+		if (b->getAge() > 1 && !b->isMutant()) {
 			if (b->getSex() == MALE) {
 				adultMales.push_back(b);
 			} else {
@@ -168,16 +170,18 @@ void BunnyColony::removeBunnyFromCount(Bunny* b) {
 
 void BunnyColony::mutateBunnies() {
 	std::vector<Bunny*> nonMutants = getNonMutantBunnies();
-	unsigned short mutantCount = (maleCount + femaleCount) - nonMutants.size();
+	mutantCount = (maleCount + femaleCount) - nonMutants.size();
+
+	// shuffle so we can use the first n Bunny* from our list
+	std::random_shuffle ( nonMutants.begin(), nonMutants.end() );
 
 	// for every mutant, mutate a regular bunny
-	for(int i = 0; i < mutantCount; i++) {
-		int randIndex = rand() % nonMutants.size();
-		Bunny* b = nonMutants[randIndex];
-		std::cout << b->getName() << " is now a Mutant!\n";
+	for (unsigned int i = 0; i < mutantCount && i < nonMutants.size(); i++) {
+		Bunny* b = nonMutants[i];
+		std::cout << b->getName() << " has become a Mutant!\n";
 		b->setMutant(true);
 		b->setName(std::string("Mutant ").append(b->getName()));
-		// TODO: bug if same nonMutant randomly selected twice in same turn
+
 	}
 }
 
