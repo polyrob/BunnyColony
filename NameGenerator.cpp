@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include "NameGenerator.h"
+#include <stdlib.h>
 
 NameGenerator::NameGenerator() {
     std::cout << "NameGenerator Constructor called..." << std::endl;

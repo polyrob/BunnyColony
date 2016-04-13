@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <time.h>
 #include "BunnyColony.h"
 
@@ -18,7 +19,7 @@ int main() {
         ++turn;
         colony.printStatus(turn);
 
-        if (turn > 1000) break;
+        if (turn >= 50) break;
     }
 
     std::cout << "End..." << std::endl;

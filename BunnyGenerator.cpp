@@ -3,6 +3,7 @@
 //
 
 #include "BunnyGenerator.h"
+#include <stdlib.h>
 
 BunnyGenerator::BunnyGenerator() {
     std::cout << "BunnyGenerator Constructor called...";

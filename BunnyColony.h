@@ -28,6 +28,7 @@ class BunnyColony {
     int femaleCount = 0;
 
     void foodShortage();
+    void removeBunnyFromCount(Bunny* b);
 
 public:
     void nextTurn();

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "BunnyColony.h"
+#include <stdlib.h>
 
 
 void BunnyColony::addBunny(Bunny *pBunny) {
@@ -51,6 +52,7 @@ void BunnyColony::ageBunnies() {
 
     // if first node is old, need to shift head right
     while (root->b->getAge() > 9) {
+    	removeBunnyFromCount(root->b);
         Node *tmp = root;
         root = root->next;
         delete (tmp->b);
@@ -68,6 +70,7 @@ void BunnyColony::ageBunnies() {
     while (nextNode != nullptr) {
         Bunny *b = nextNode->b;
         if (b->getAge() > 9) {
+        	removeBunnyFromCount(b);
             current->next = nextNode->next;
             delete (nextNode->b);
             delete (nextNode);
@@ -77,6 +80,7 @@ void BunnyColony::ageBunnies() {
             b->setAge(b->getAge() + 1);
         }
         current = current->next;
+        if (current == nullptr) break;
         nextNode = current->next;
 
     }
@@ -119,6 +123,7 @@ void BunnyColony::foodShortage() {
 
     // if first node is old, need to shift head right
     if (rand() % 2) {
+    	removeBunnyFromCount(root->b);
         Node *tmp = root;
         root = root->next;
         delete (tmp->b);
@@ -133,16 +138,26 @@ void BunnyColony::foodShortage() {
     // go through the rest
     while (nextNode != nullptr) {
         if (rand() % 2) {
+        	removeBunnyFromCount(nextNode->b);
             current->next = nextNode->next;
             delete (nextNode->b);
             delete (nextNode);
 
         }
         current = current->next;
+        if (current== nullptr) break;
         nextNode = current->next;
 
     }
 
+}
+
+void BunnyColony::removeBunnyFromCount(Bunny* b) {
+	if (b->getSex() == Bunny::MALE) {
+	        --maleCount;
+	    } else {
+	        --femaleCount;
+	    }
 }
 
 void BunnyColony::seed() {
