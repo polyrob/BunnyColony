@@ -66,6 +66,8 @@ public:
 		this->mutant = mutant;
 	}
 
+	bool isTimeForBunnyHeaven();
+
 	void printInfo() const;
 };
 
