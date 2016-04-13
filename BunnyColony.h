@@ -31,11 +31,9 @@ class BunnyColony {
     void removeBunnyFromCount(Bunny* b);
 
 public:
-    void nextTurn();
+    void nextTurn(const int &iteration);
 
     void addBunny(Bunny *pBunny);
-
-    void printStatus(const int &iteration);
 
     void procreate();
 

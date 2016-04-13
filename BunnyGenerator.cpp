@@ -4,25 +4,26 @@
 
 #include "BunnyGenerator.h"
 #include <stdlib.h>
+#include "Enum.h"
 
 BunnyGenerator::BunnyGenerator() {
-    std::cout << "BunnyGenerator Constructor called...";
+    std::cout << "BunnyGenerator Constructor called...\n";
     this->nameGenerator = new NameGenerator();
 }
 
 Bunny *BunnyGenerator::makeRandomBunny() {
     Bunny *b = new Bunny();
-    Bunny::Sex s = Bunny::MALE;
+    Sex s = MALE;
     if (rand() % 2) {
-        s = Bunny::FEMALE;
+        s = FEMALE;
     }
 
     b->setSex(s);
     b->setName(nameGenerator->getRandomName(s));
     b->setAge(0);
 
-    b->setColor(Bunny::Color(rand() % 4));
-
+    b->setColor(Color(rand() % 4));
+    std::cout << b->getName() << " has been born!\n";
     return b;
 }
 
@@ -30,9 +31,9 @@ Bunny *BunnyGenerator::makeRandomBunny() {
 
 Bunny *BunnyGenerator::makeBunnyFromParent(const Bunny *b) {
     Bunny *child = new Bunny();
-    Bunny::Sex s = Bunny::MALE;
+    Sex s = MALE;
     if (rand() % 2) {
-        s = Bunny::FEMALE;
+        s = FEMALE;
     }
 
     child->setSex(s);
@@ -40,7 +41,7 @@ Bunny *BunnyGenerator::makeBunnyFromParent(const Bunny *b) {
     child->setAge(0);
 
     child->setColor(b->getColor());
-
+    std::cout << child->getName() << " has been born!\n";
     return child;
 }
 

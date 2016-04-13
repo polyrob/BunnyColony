@@ -5,6 +5,7 @@
 #include <iostream>
 #include "BunnyColony.h"
 #include <stdlib.h>
+#include "Enum.h"
 
 
 void BunnyColony::addBunny(Bunny *pBunny) {
@@ -24,26 +25,23 @@ void BunnyColony::addBunny(Bunny *pBunny) {
         temp->next = newNode;
     }
 
-    if (pBunny->getSex() == Bunny::MALE) {
+    if (pBunny->getSex() == MALE) {
         ++maleCount;
     } else {
         ++femaleCount;
     }
 }
 
-void BunnyColony::printStatus(const int &iteration) {
-    std::cout << "*** ITERATION " << iteration << std::endl;
-    std::cout << " Colony Size: " << maleCount + femaleCount << ", M/F: " << maleCount << "/" << femaleCount <<
-    std::endl;
 
-}
-
-void BunnyColony::nextTurn() {
+void BunnyColony::nextTurn(const int &iteration) {
+	std::cout << "\n*** ITERATION " << iteration << std::endl;
     ageBunnies();  // increment age and kill if old
     procreate();
     if (maleCount + femaleCount > 1000) {
         foodShortage();
     }
+    std::cout << " Colony Size: " << maleCount + femaleCount << ", M/F: " << maleCount << "/" << femaleCount <<
+        std::endl;
 }
 
 
@@ -53,6 +51,7 @@ void BunnyColony::ageBunnies() {
     // if first node is old, need to shift head right
     while (root->b->getAge() > 9) {
     	removeBunnyFromCount(root->b);
+    	std::cout << root->b->getName() << " has died from old age.\n";
         Node *tmp = root;
         root = root->next;
         delete (tmp->b);
@@ -71,6 +70,7 @@ void BunnyColony::ageBunnies() {
         Bunny *b = nextNode->b;
         if (b->getAge() > 9) {
         	removeBunnyFromCount(b);
+        	std::cout << b->getName() << " has died from old age.\n";
             current->next = nextNode->next;
             delete (nextNode->b);
             delete (nextNode);
@@ -98,7 +98,7 @@ void BunnyColony::procreate() {
     while (temp != nullptr) {
         Bunny *b = temp->b;
         if (b->getAge() > 1) {
-            if (b->getSex() == Bunny::MALE) {
+            if (b->getSex() == MALE) {
                 adultMales.push_back(b);
             } else {
                 adultFemales.push_back(b);
@@ -124,6 +124,7 @@ void BunnyColony::foodShortage() {
     // if first node is old, need to shift head right
     if (rand() % 2) {
     	removeBunnyFromCount(root->b);
+    	std::cout << root->b->getName() << " has died from lack of food.\n";
         Node *tmp = root;
         root = root->next;
         delete (tmp->b);
@@ -139,6 +140,7 @@ void BunnyColony::foodShortage() {
     while (nextNode != nullptr) {
         if (rand() % 2) {
         	removeBunnyFromCount(nextNode->b);
+        	std::cout << nextNode->b->getName() << " has died from lack of food.\n";
             current->next = nextNode->next;
             delete (nextNode->b);
             delete (nextNode);
@@ -153,7 +155,7 @@ void BunnyColony::foodShortage() {
 }
 
 void BunnyColony::removeBunnyFromCount(Bunny* b) {
-	if (b->getSex() == Bunny::MALE) {
+	if (b->getSex() == MALE) {
 	        --maleCount;
 	    } else {
 	        --femaleCount;

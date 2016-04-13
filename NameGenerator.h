@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include "Bunny.h"
+#include "Enum.h"
 
 class NameGenerator {
 
@@ -27,7 +28,7 @@ public:
 
     virtual ~NameGenerator() { std::cout << "NameGenerator Destructor called..."; }
 
-    std::string getRandomName(const Bunny::Sex sex);
+    std::string getRandomName(const Sex sex);
 };
 
 
