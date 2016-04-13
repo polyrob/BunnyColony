@@ -5,19 +5,23 @@
 #ifndef BUNNY_BUNNYCOLONY_H
 #define BUNNY_BUNNYCOLONY_H
 
-
 #include <vector>
 #include "Bunny.h"
 #include "BunnyGenerator.h"
 
+struct Node {
+    Bunny* b;
+    Node* next;
+};
+
 class BunnyColony {
 
-    vector<Bunny *> bunnies;
+//    vector<Bunny *> bunnies;
+    Node* bunnies = nullptr;
 
     BunnyGenerator bunnyGenerator;
 
     void ageBunnies();
-//    int getFemaleCount();
 
     // although calling size on a vector is O(1), we still need to know the mix
     int maleCount = 0;
@@ -31,8 +35,6 @@ public:
     void addBunny(Bunny *pBunny);
 
     void printStatus(const int &iteration);
-
-    void killOldBunnies();
 
     void procreate();
 
