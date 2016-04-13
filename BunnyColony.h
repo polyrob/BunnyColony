@@ -6,48 +6,50 @@
 #define BUNNY_BUNNYCOLONY_H
 
 #include <vector>
+#include <functional>
 #include "Bunny.h"
 #include "BunnyGenerator.h"
 
 struct Node {
-    Bunny* b;
-    Node* next;
+	Bunny* b;
+	Node* next;
 };
 
 class BunnyColony {
 
 //    vector<Bunny *> root;
-    Node*root = nullptr;
+	Node*root = nullptr;
 
-    BunnyGenerator bunnyGenerator;
+	BunnyGenerator bunnyGenerator;
 
-    void ageBunnies();
+	void ageBunnies();
 
-    // although calling size on a vector is O(1), we still need to know the mix
-    int maleCount = 0;
-    int femaleCount = 0;
+	// although calling size on a vector is O(1), we still need to know the mix
+	int maleCount = 0;
+	int femaleCount = 0;
 
-    void foodShortage();
-    void removeBunnyFromCount(Bunny* b);
+	void foodShortage();
+	void removeBunnyFromCount(Bunny* b);
+	void mutateBunnies();
+
+	std::vector<Bunny*> getNonMutantBunnies();
 
 public:
-    void nextTurn(const int &iteration);
+	void nextTurn(const int &iteration);
 
-    void addBunny(Bunny *pBunny);
+	void addBunny(Bunny *pBunny);
 
-    void procreate();
+	void procreate();
 
-    void seed();
+	void seed();
 
+	int getMaleCount() const {
+		return maleCount;
+	}
 
-    int getMaleCount() const {
-        return maleCount;
-    }
-
-    int getFemaleCount() const {
-        return femaleCount;
-    }
+	int getFemaleCount() const {
+		return femaleCount;
+	}
 };
-
 
 #endif //BUNNY_BUNNYCOLONY_H
