@@ -29,9 +29,9 @@ void NameGenerator::loadFromFile(const char *filename, vector<string> &v) {
     }
 }
 
-std::string NameGenerator::getRandomName(const Bunny::Sex sex) {
+std::string NameGenerator::getRandomName(const Sex sex) {
     std::string fullName;
-    if (sex == Bunny::Sex::MALE) {
+    if (sex == Sex::MALE) {
         int index = rand() % vFirstNamesMale.size();
         fullName.append(vFirstNamesMale[index]);
     } else {

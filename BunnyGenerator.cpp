@@ -4,50 +4,41 @@
 
 #include "BunnyGenerator.h"
 #include <stdlib.h>
+#include "Enum.h"
 
 BunnyGenerator::BunnyGenerator() {
-    std::cout << "BunnyGenerator Constructor called...";
-    this->nameGenerator = new NameGenerator();
+	std::cout << "BunnyGenerator Constructor called...\n";
+	this->nameGenerator = new NameGenerator();
 }
 
-Bunny *BunnyGenerator::makeRandomBunny() {
-    Bunny *b = new Bunny();
-    Bunny::Sex s = Bunny::MALE;
-    if (rand() % 2) {
-        s = Bunny::FEMALE;
-    }
+Bunny *BunnyGenerator::makeBunny() {
+	Bunny *b = new Bunny();
+	Sex s = MALE;
+	if (rand() % 2) {
+		s = FEMALE;
+	}
 
-    b->setSex(s);
-    b->setName(nameGenerator->getRandomName(s));
-    b->setAge(0);
+	b->setSex(s);
+	b->setName(nameGenerator->getRandomName(s));
+	b->setAge(0);
+	b->setColor(Color(rand() % 4));
 
-    b->setColor(Bunny::Color(rand() % 4));
+	// Determine if will be a mutant, 2%
+	if (rand() % 50 == 1) {
+		b->setMutant(true);
+		std::cout << "Mutant "; // prefix born announcement
+	} else {
+		b->setMutant(false);
+	}
 
-    return b;
+	std::cout << b->getName() << " has been born!\n";
+	return b;
 }
 
+Bunny *BunnyGenerator::makeBunny(const Bunny *b) {
+	Bunny* child = makeBunny();
+	child->setColor(b->getColor());		// set color to that of parent
 
-
-Bunny *BunnyGenerator::makeBunnyFromParent(const Bunny *b) {
-    Bunny *child = new Bunny();
-    Bunny::Sex s = Bunny::MALE;
-    if (rand() % 2) {
-        s = Bunny::FEMALE;
-    }
-
-    child->setSex(s);
-    child->setName(nameGenerator->getRandomName(s));
-    child->setAge(0);
-
-    child->setColor(b->getColor());
-
-    return child;
+	return child;
 }
-
-
-
-
-
-
-
 

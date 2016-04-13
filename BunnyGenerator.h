@@ -12,14 +12,16 @@ class BunnyGenerator {
 
     NameGenerator *nameGenerator;
 
+
 public:
 
     BunnyGenerator();
     virtual ~BunnyGenerator() { std::cout << "NameGenerator Destructor called..." << std::endl; }
 
-    Bunny *makeRandomBunny();
+    Bunny *makeBunny(const Bunny *b);
+    Bunny *makeBunny();
 
-    Bunny *makeBunnyFromParent(const Bunny *b);
+//    Bunny *makeBunnyFromParent(const Bunny *b);
 
 };
 

@@ -7,69 +7,66 @@
 
 #include <string>
 #include <iostream>
+#include "Enum.h"
 
 using namespace std;
 
 class Bunny {
 
+	string name;
+	Sex sex;
+	Color color;
+	int age;
+	bool mutant;
 
 public:
-    enum Sex {
-        MALE, FEMALE
-    };
-    enum Color {
-        WHITE, BROWN, BLACK, SPOTTED
-    };
+	Bunny() {
+	}
 
+	virtual ~Bunny() {
+	}
 
-    Bunny() { }
+	int getAge() const {
+		return age;
+	}
 
-    virtual ~Bunny() { }
+	void setAge(int age) {
+		Bunny::age = age;
+	}
 
+	Color getColor() const {
+		return color;
+	}
 
-    int getAge() const {
-        return age;
-    }
+	void setColor(Color color) {
+		Bunny::color = color;
+	}
 
-    void setAge(int age) {
-        Bunny::age = age;
-    }
+	Sex getSex() const {
+		return sex;
+	}
 
-    Color getColor() const {
-        return color;
-    }
+	void setSex(Sex sex) {
+		Bunny::sex = sex;
+	}
 
-    void setColor(Color color) {
-        Bunny::color = color;
-    }
+	const string &getName() const {
+		return name;
+	}
 
-    Sex getSex() const {
-        return sex;
-    }
+	void setName(const string &name) {
+		Bunny::name = name;
+	}
 
-    void setSex(Sex sex) {
-        Bunny::sex = sex;
-    }
+	bool isMutant() const {
+		return mutant;
+	}
 
-    const string &getName() const {
-        return name;
-    }
+	void setMutant(bool mutant) {
+		this->mutant = mutant;
+	}
 
-    void setName(const string &name) {
-        Bunny::name = name;
-    }
-
-    void printInfo() const;
-
-
-
-
-private:
-    string name;
-    Sex sex;
-    Color color;
-    int age;
+	void printInfo() const;
 };
-
 
 #endif //BUNNY_BUNNY_H
