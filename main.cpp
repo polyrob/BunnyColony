@@ -10,15 +10,16 @@ int main() {
     colony.seed();
 
 
-    int itr = 0;
-    colony.printStatus(itr);
+    int turn = 0;
+    colony.printStatus(turn);
 
     while (colony.getMaleCount() > 0 && colony.getFemaleCount() > 0) {
         colony.nextTurn();
-        ++itr;
-        colony.printStatus(itr);
-        if (itr % 10 == 0) system("pause"); // stop every 10 turns
+        ++turn;
+        colony.printStatus(turn);
+
+        if (turn > 1000) break;
     }
 
-    std::cout << "End...";
+    std::cout << "End..." << std::endl;
 }

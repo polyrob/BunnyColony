@@ -49,7 +49,6 @@ void BunnyColony::nextTurn() {
 void BunnyColony::ageBunnies() {
     if (root == nullptr) return;
 
-
     // if first node is old, need to shift head right
     while (root->b->getAge() > 9) {
         Node *tmp = root;
@@ -70,6 +69,7 @@ void BunnyColony::ageBunnies() {
         Bunny *b = nextNode->b;
         if (b->getAge() > 9) {
             current->next = nextNode->next;
+            delete (nextNode->b);
             delete (nextNode);
 
         } else {
@@ -114,40 +114,27 @@ void BunnyColony::procreate() {
 }
 
 void BunnyColony::foodShortage() {
-    Node *temp = root;
-    while (temp != nullptr) {
-        if (rand() % 2) {
-            // kill it
-            Bunny *b = temp->b;
+    std::cout << "! Food shortage." << std::endl;
+    if (root == nullptr) return;
 
-            if (b->getAge() > 1) {
-                if (b->getSex() == Bunny::MALE) {
-                    --maleCount;
-                } else {
-                    --femaleCount;
-                }
-            }
-
-        }
-        temp = temp->next;
+    // if first node is old, need to shift head right
+    if (rand() % 2) {
+        Node *tmp = root;
+        root = root->next;
+        delete (tmp->b);
+        delete (tmp);
     }
 
+    if (root == nullptr) return; // might be empty, now
 
     Node *current = root;
     Node *nextNode = root->next;
 
     // go through the rest
     while (nextNode != nullptr) {
-        Bunny *b = nextNode->b;
         if (rand() % 2) {
-
-            if (b->getSex() == Bunny::MALE) {
-                --maleCount;
-            } else {
-                --femaleCount;
-            }
-
             current->next = nextNode->next;
+            delete (nextNode->b);
             delete (nextNode);
 
         }
