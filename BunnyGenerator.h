@@ -16,7 +16,7 @@ class BunnyGenerator {
 public:
 
     BunnyGenerator();
-    virtual ~BunnyGenerator() { std::cout << "NameGenerator Destructor called..." << std::endl; }
+    virtual ~BunnyGenerator();
 
     Bunny *makeBunny(const Bunny *b);
     Bunny *makeBunny();

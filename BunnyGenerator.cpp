@@ -11,6 +11,11 @@ BunnyGenerator::BunnyGenerator() {
 	this->nameGenerator = new NameGenerator();
 }
 
+BunnyGenerator::~BunnyGenerator() {
+	std::cout << "BunnyGenerator Destructor called..." << std::endl;
+	delete(nameGenerator);
+}
+
 Bunny *BunnyGenerator::makeBunny() {
 	Bunny *b = new Bunny();
 	Sex s = MALE;
