@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include "BunnyColony.h"
-#include "Enum.h"
+
 
 void BunnyColony::addBunny(Bunny *pBunny) {
 	Node *newNode = new Node();
@@ -34,7 +34,7 @@ void BunnyColony::addBunny(Bunny *pBunny) {
 
 void BunnyColony::nextTurn(const int &iteration) {
 	std::cout << "\n*** ITERATION " << iteration << std::endl;
-	ageBunnies();  // increment age and kill if old
+	ageBunnies();
 	procreate();
 	mutateBunnies();
 	if (maleCount + femaleCount > 1000) {
@@ -47,12 +47,9 @@ void BunnyColony::nextTurn(const int &iteration) {
 }
 
 void BunnyColony::ageBunnies() {
-	if (root == nullptr)
-		return;
-
 	// if first node is old, need to shift head right
 	while (root != nullptr && root->b->isTimeForBunnyHeaven()) {
-		removeBunnyFromCount(root->b);
+		removeBunnyFromCount(root->b);			// it's just the bunny's time :(
 		std::cout << root->b->getName() << " has died from old age.\n";
 		Node *tmp = root;
 		root = root->next;
@@ -61,8 +58,8 @@ void BunnyColony::ageBunnies() {
 	}
 
 	if (root == nullptr)
-		return; // might be empty, now
-	root->b->setAge(root->b->getAge() + 1); //age the first bunny
+		return; 								// might be empty now after processing
+	root->b->setAge(root->b->getAge() + 1); 	//age the first bunny
 
 	Node *current = root;
 	Node *nextNode = root->next;
@@ -78,14 +75,12 @@ void BunnyColony::ageBunnies() {
 			delete (nextNode);
 
 		} else {
-			// age
-			b->setAge(b->getAge() + 1);
+			b->setAge(b->getAge() + 1);		// if it's surviving, age it 1
 		}
 		current = current->next;
 		if (current == nullptr)
-			break;
+			break;							// if it's the last one, break out of the loop
 		nextNode = current->next;
-
 	}
 }
 
