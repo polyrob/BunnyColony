@@ -33,6 +33,7 @@ Bunny *BunnyGenerator::makeBunny() {
 
 	// set longevity
 	int maxAge = distribution(generator);
+	if (maxAge < 1) maxAge = 1;				// crazy saftey, just in case outlier gets it below 1
 	b->setLongevity(maxAge);
 
 	// Determine if will be a mutant, 2%
