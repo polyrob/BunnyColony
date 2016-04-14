@@ -120,7 +120,7 @@ void BunnyColony::procreate() {
 }
 
 void BunnyColony::foodShortage() {
-	std::cout << "! Food shortage." << std::endl;
+	//TODO: this isn't - per spec - killing 'exactly half' of the bunnies. It's more of a coin flip
 	if (root == nullptr)
 		return;
 

@@ -6,51 +6,37 @@
 #define BUNNY_BUNNYCOLONY_H
 
 #include <vector>
-#include <functional>
 #include "Bunny.h"
 #include "BunnyGenerator.h"
 
 struct Node {
-	Bunny* b;
-	Node* next;
+    Bunny *b;
+    Node *next;
 };
 
 class BunnyColony {
 
-//    vector<Bunny *> root;
-	Node*root = nullptr;
+    Node *root = nullptr;
+    unsigned int maleCount = 0;
+    unsigned int femaleCount = 0;
+    unsigned int mutantCount = 0;
 
-	BunnyGenerator bunnyGenerator;
+    BunnyGenerator bunnyGenerator;
 
-	void ageBunnies();
-
-	// although calling size on a vector is O(1), we still need to know the mix
-	unsigned int maleCount = 0;
-	unsigned int femaleCount = 0;
-	unsigned int mutantCount = 0;
-
-	void foodShortage();
-	void removeBunnyFromCount(Bunny* b);
-	void mutateBunnies();
-
-	std::vector<Bunny*> getNonMutantBunnies();
+    void ageBunnies();
+    void foodShortage();
+    void removeBunnyFromCount(Bunny *b);
+    void mutateBunnies();
+    std::vector<Bunny *> getNonMutantBunnies();
 
 public:
-	void nextTurn(const int &iteration);
+    void nextTurn(const int &iteration);
+    void addBunny(Bunny *pBunny);
+    void procreate();
+    void seed();
 
-	void addBunny(Bunny *pBunny);
-
-	void procreate();
-
-	void seed();
-
-	int getMaleCount() const {
-		return maleCount;
-	}
-
-	int getFemaleCount() const {
-		return femaleCount;
-	}
+    int getMaleCount() const { return maleCount; }
+    int getFemaleCount() const { return femaleCount; }
 };
 
 #endif //BUNNY_BUNNYCOLONY_H
