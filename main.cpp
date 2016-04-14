@@ -10,7 +10,7 @@ int main() {
 
     int turn = 0;
 
-    while (colony.getMaleCount() > 0 && colony.getFemaleCount() > 0) {
+    while (colony.getMaleCount()+colony.getFemaleCount() > 0) {
         colony.nextTurn(++turn);
 
         if (turn >= 500) break; // tmp safety just in case we don't break loop

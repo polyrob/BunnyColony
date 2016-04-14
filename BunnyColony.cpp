@@ -50,7 +50,7 @@ void BunnyColony::ageBunnies() {
     // if first node is old, need to shift head right
     while (root != nullptr && root->b->isTimeForBunnyHeaven()) {
         removeBunnyFromCount(root->b);            // it's just the bunny's time :(
-        std::cout << root->b->getName() << " has died from old age.\n";
+        std::cout << root->b->getName() << " has died from old age, " << root->b->getAge() << " yrs.\n";
         Node *tmp = root;
         root = root->next;
         delete (tmp->b);
@@ -69,7 +69,7 @@ void BunnyColony::ageBunnies() {
         Bunny *b = nextNode->b;
         if (b->isTimeForBunnyHeaven()) {
             removeBunnyFromCount(b);
-            std::cout << b->getName() << " has died from old age.\n";
+            std::cout << b->getName() << " has died from old age, " << b->getAge() << " yrs.\n";
             current->next = nextNode->next;
             delete (nextNode->b);
             delete (nextNode);

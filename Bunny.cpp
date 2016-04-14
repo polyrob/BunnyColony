@@ -10,7 +10,7 @@ using namespace std;
 bool Bunny::isTimeForBunnyHeaven() {
     if (!mutant && age >= longevity)
         return true;
-    else if (age >= longevity + 40)
+    else if (age >= longevity * 2)
         return true;
     return false;
 }
