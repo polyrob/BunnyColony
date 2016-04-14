@@ -51,7 +51,7 @@ void BunnyColony::ageBunnies() {
 		return;
 
 	// if first node is old, need to shift head right
-	while (root->b->isTimeForBunnyHeaven()) {
+	while (root != nullptr && root->b->isTimeForBunnyHeaven()) {
 		removeBunnyFromCount(root->b);
 		std::cout << root->b->getName() << " has died from old age.\n";
 		Node *tmp = root;
@@ -176,13 +176,15 @@ void BunnyColony::mutateBunnies() {
 	std::random_shuffle ( nonMutants.begin(), nonMutants.end() );
 
 	// for every mutant, mutate a regular bunny
+	unsigned int newMutants = 0;
 	for (unsigned int i = 0; i < mutantCount && i < nonMutants.size(); i++) {
 		Bunny* b = nonMutants[i];
 		std::cout << b->getName() << " has become a Mutant!\n";
 		b->setMutant(true);
+		++newMutants;
 		b->setName(std::string("Mutant ").append(b->getName()));
-
 	}
+	mutantCount += newMutants;
 }
 
 std::vector<Bunny*> BunnyColony::getNonMutantBunnies() {

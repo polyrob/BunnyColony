@@ -9,6 +9,8 @@ Cooper
 Calvin
 Chris
 Chuck
+Dan
+Daniel
 Dennis
 Darryl
 Evan
@@ -28,5 +30,8 @@ Quentin
 Robby
 Roger
 Steve
+Tom
+Tommy
+Tim
 Trevor
 Walt
