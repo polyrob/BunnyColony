@@ -17,6 +17,7 @@ class Bunny {
 	Sex sex;
 	Color color;
 	int age;
+	int longevity;
 	bool mutant;
 
 public:
@@ -32,6 +33,14 @@ public:
 
 	void setAge(int age) {
 		Bunny::age = age;
+	}
+
+	int getLongevity() const {
+		return longevity;
+	}
+
+	void setLongevity(int longevity) {
+		Bunny::longevity = longevity;
 	}
 
 	Color getColor() const {

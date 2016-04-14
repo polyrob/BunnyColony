@@ -12,6 +12,8 @@ int main() {
 
     while (colony.getMaleCount() > 0 && colony.getFemaleCount() > 0) {
         colony.nextTurn(++turn);
+
+        if (turn >= 500) break; // tmp safety just in case we don't break loop
     }
 
     std::cout << "\n # Completed in " << turn << " turns.\n";
